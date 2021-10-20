@@ -1,0 +1,2 @@
+class OrderInventory < ApplicationRecord
+end

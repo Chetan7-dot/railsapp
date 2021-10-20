@@ -1,0 +1,18 @@
+<!-- body of the email -->
+<!DOCTYPE html>
+<html>
+ <head>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+ </head>
+ <body>
+<h1>Hello</h1>
+<p>
+  This is a test email to showcase demo of Active Job in Rails.
+</p>
+ <% @product.images.each do |image| %>
+        <%= image_tag image, style: "width:150px;height:150px;", class: "card-img-top rounded-lg border border-dark m-2" %>
+ <% end %>
+<p><%= @product.product_name %></p>
+<p><%= @product.product_description %></p>
+ </body>
+</html>

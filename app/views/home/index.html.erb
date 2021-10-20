@@ -1,0 +1,39 @@
+<% if user_signed_in? %>
+    <h1>All Products</h1>
+    <div class="row ml-2">
+      <div class="col-12 col-md-7 col-lg-9 bg-light rounded-lg img-thumbnail">
+        <div class="row justify-content-center py-4">
+          <% @products.each do |product| %>
+            <div class="card my-2 col-12 col-md-4 col-lg-3 rounded-lg mx-2 card-shadow">
+              <div class="text-center">
+                <% product.images.each do |image| %>
+                  <%= image_tag image, class: "card-img-top rounded-lg border m-2 w-50", :size => "180x180"  %>
+                <% end %>
+              </div>
+            <div class="card-body text-center">
+              <h5 class="card-title">Name- <%= product.product_name %></h5>
+              <small class="text-muted d-block">Price- <%= product.product_price %></small>
+              <small class="text-muted d-block">Description- <%= product.product_description %></small>
+              <small class="text-muted d-block">Size- <%= product.product_size %><br></small>
+              <small class="text-muted d-block">Stock-  <%= product.product_in_strock%></small>
+            </div>
+              <div class="card-body p-1 pb-2">
+                <div class="" style="bottom:2px;height: 45%">
+                  <% if can? :update, product %>
+                    <%= link_to 'Show', product %>
+                  <% end %>
+                  <% if can? :update, product %>
+                    <%= link_to 'Edit', edit_product_path(product)  %>
+                  <% end %>
+                  <% if can? :delete, product %>
+                    <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }  %>
+                  <% end %>
+                  <%= button_to 'Add to cart',  cart_add_to_cart_path(product_id: product, cart_id: current_user.cart.id), :method => :post, remote: true, class:"btn btn-success" %>
+               </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% end %>

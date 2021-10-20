@@ -1,0 +1,31 @@
+<% if user_signed_in? %>
+<br><br>
+
+<table class="table" border="1">
+  <thead>
+  <tr>
+    <th scope="col">Product Name</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Price</th>
+    <th scope="col">Actions</th>
+    <th scope="col">Remove</th>
+    <th scope="col">Total Amount</th>
+    </tr>
+  </thead>
+  <tr>
+    <% current_user.cart.cart_items.each do |cart_item| %>
+      <td><%= cart_item.product.product_name %></td>
+      <td><%= cart_item.quantity %></td>
+      <td><%= cart_item.product.product_price %></td>
+      <td><div style="width:100px; height:100px">
+        <% cart_item.product.images.each do |image| %>
+            <%= image_tag image %>
+        <% end %></div></td>
+      <td><%= link_to 'Remove Item', cart_remove_from_cart_path(item_id: cart_item.id, cart_id: current_user.cart.id), :method => :post , class:"btn btn-danger" %></td>
+      <td><%= cart_item.total %></td>
+  </tr>
+    <% end %>
+</table>
+    <%= button_to 'Pay', orders_path(product_id: @product, user_id: current_user.id), :method => :post, data: { confirm: 'Are you sure? to placed order' }, class: "btn btn-danger" %>
+    <p class="text-end "><strong align="text-align:left;">Total Amount= <%= current_user.cart.total_price %></strong></p>
+<% end %>

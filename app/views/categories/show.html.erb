@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+<br><br>
+<p id="notice"><%= notice %></p>
+<div class="card container shadow p-3 mb-5 bg-white rounded">
+  <div class="card-body">
+    <p>
+      <% @category.products.each do |product| %>
+        <strong>Product Name:</strong>
+        <%= product.product_name%><br>
+        <% end %>
+    </p>
+  </div>
+</div>
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

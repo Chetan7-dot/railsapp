@@ -1,0 +1,21 @@
+<% if user_signed_in? %>
+<br><br>
+
+<table class="table" border="1">
+  <thead>
+  <tr>
+    <th scope="col">Product Name</th>
+    <th scope="col">Price</th>
+    <th scope="col">Total Amount</th>
+    </tr>
+  </thead>
+  <tr>
+  <% @order_items.each do |order_item| %>
+    <td><%= order_item.product.product_name %></td>
+    <td><%= order_item.product.product_price %></td>
+    <td><%= order_item.total %></td>
+    </tr>
+  <% end %>
+</table>
+<p class="text-end "><strong align="text-align:left;">Total Amount= <%= @order.total_price %></strong></p>
+<% end %>
